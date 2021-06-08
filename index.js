@@ -54,9 +54,22 @@ class Cat {
 }
 
 const myCat = Reflect.construct(Cat, ['Sophie']);
-console.log(Reflect.getPrototypeOf(myCat));  // Cat
-
+// console.log(Reflect.getPrototypeOf(myCat));  // Cat
 Reflect.setPrototypeOf(myCat, {name: 'Oliver'});
+// console.log(Reflect.getPrototypeOf(myCat)); // {name: 'Oliver'}
 
-console.log(Reflect.getPrototypeOf(myCat)); // {name: 'Oliver'}
+
+
+class Movie {
+  constructor(name, length) {
+    this.name = name;
+    this.length = length;
+  }
+}
+
+const movie = new Movie('Mad Max', 212);
+
+console.log(Reflect.get(movie, 'length'));
+Reflect.set(movie, 'length', 500);
+console.log(Reflect.get(movie, 'length'));  // 500
 
