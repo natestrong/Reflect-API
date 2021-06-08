@@ -65,11 +65,37 @@ class Movie {
     this.name = name;
     this.length = length;
   }
+
+  get intermission() {
+    return this.length / 2;
+  }
 }
 
 const movie = new Movie('Mad Max', 212);
 
-console.log(Reflect.get(movie, 'length'));
+// console.log(Reflect.get(movie, 'length'));
 Reflect.set(movie, 'length', 500);
-console.log(Reflect.get(movie, 'length'));  // 500
+// console.log(Reflect.get(movie, 'length'));  // 500
+const obj = {length: 2};
+// console.log(Reflect.get(movie, 'intermission', obj));  // 2
+
+
+// ~~~ Creating / Deleting ~~~
+Reflect.defineProperty(
+  movie, 
+  'rating', 
+  {value: '⭐️️️️️⭐️⭐️⭐️', writable: true}
+  )
+
+// console.log(movie.rating);
+
+Reflect.deleteProperty(movie, 'length');
+console.log(movie.length);
+
+Reflect.preventExtensions(movie);
+Reflect.defineProperty(movie, 'boxOffice', {value: 10_000_000});
+console.log(movie.boxOffice);
+movie.originalTitle = 'Cool Runnings';
+console.log(movie.originalTitle)
+
 
